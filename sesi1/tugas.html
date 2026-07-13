@@ -60,12 +60,13 @@
                         
                         <!-- Right Column: Avatar/Image -->
                         <td width="40%" valign="middle" align="center">
-                            <!-- High performance inline SVG Avatar to prevent external asset dependency -->
-                            <svg width="220" height="220" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="100" cy="100" r="95" fill="#3182ce"/>
-                                <circle cx="100" cy="85" r="40" fill="#ffffff"/>
-                                <path d="M 40 160 A 60 60 0 0 1 160 160 Z" fill="#ffffff"/>
-                            </svg>
+                            <!-- Image tag replacing the SVG placeholder -->
+                            <img src="/sesi1/me.jpeg" 
+                                 alt="Aji Waluyo Profile Picture" 
+                                 width="200" 
+                                 height="200" 
+                                 style="border-radius: 50%; object-fit: cover; border: 4px solid #3182ce;"
+                                 onerror="this.src='https://via.placeholder.com/200?text=Aji+Waluyo'">
                         </td>
                     </tr>
                 </table>
@@ -164,23 +165,24 @@
                     </tr>
                     <tr>
                         <td>
-                            <!-- Portfolio Grid List -->
+                            <!-- Portfolio Grid List with Full-Screen Images inside Cards -->
                             <table width="100%" cellpadding="15" cellspacing="15" border="0">
                                 <tr>
                                     <!-- Project Card 1 -->
-                                    <td width="50%" bgcolor="#ffffff" valign="top" style="border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+                                    <td width="50%" bgcolor="#ffffff" valign="top" style="border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px rgba(0,0,0,0.02); overflow: hidden;">
                                         <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                             <tr>
-                                                <td align="center" bgcolor="#edf2f7" style="padding: 30px; border-radius: 6px;">
-                                                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#3182ce" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                                                        <line x1="8" y1="21" x2="16" y2="21"></line>
-                                                        <line x1="12" y1="17" x2="12" y2="21"></line>
-                                                    </svg>
+                                                <td align="center">
+                                                    <!-- Image fits the card container perfectly on top -->
+                                                    <img src="/sesi1/ecommerce.webp"
+                                                         alt="E-Commerce Interface Template"
+                                                         style="width: 100%; height: 200px; object-fit: cover; display: block; border-top-left-radius: 8px; border-top-right-radius: 8px;"
+                                                         onerror="this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80'">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-top: 15px;">
+                                                <!-- Text description has clean padding -->
+                                                <td style="padding: 20px;">
                                                     <font color="#2d3748" size="4"><b>E-Commerce Interface Template</b></font>
                                                     <p><font color="#4a5568" size="2">A robust front-end layout featuring modular item listings, navigation models, and lightweight structural elements.</font></p>
                                                     <font size="2" color="#3182ce"><b>HTML &bull; Table Design &bull; Static Layout</b></font>
@@ -190,21 +192,20 @@
                                     </td>
                                     
                                     <!-- Project Card 2 -->
-                                    <td width="50%" bgcolor="#ffffff" valign="top" style="border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+                                    <td width="50%" bgcolor="#ffffff" valign="top" style="border-radius: 8px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px rgba(0,0,0,0.02); overflow: hidden;">
                                         <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                             <tr>
-                                                <td align="center" bgcolor="#edf2f7" style="padding: 30px; border-radius: 6px;">
-                                                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#3182ce" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                                                        <polyline points="14 2 14 8 20 8"></polyline>
-                                                        <line x1="16" y1="13" x2="8" y2="13"></line>
-                                                        <line x1="16" y1="17" x2="8" y2="17"></line>
-                                                        <polyline points="10 9 9 9 8 9"></polyline>
-                                                    </svg>
+                                                <td align="center">
+                                                    <!-- Image fits the card container perfectly on top -->
+                                                    <img src="/sesi1/Interactive-Landing-Page-Important-for-Sales-1.png"
+                                                         alt="Interactive Landing Page Structure"
+                                                         style="width: 100%; height: 200px; object-fit: cover; display: block; border-top-left-radius: 8px; border-top-right-radius: 8px;"
+                                                         onerror="this.src='https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&q=80'">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="padding-top: 15px;">
+                                                <!-- Text description has clean padding -->
+                                                <td style="padding: 20px;">
                                                     <font color="#2d3748" size="4"><b>Interactive Landing Page Structure</b></font>
                                                     <p><font color="#4a5568" size="2">A structural profile outline featuring seamless grid alignments, fully responsive columns, and organized sections.</font></p>
                                                     <font size="2" color="#3182ce"><b>Semantic HTML &bull; UI/UX &bull; Responsive Layout</b></font>
