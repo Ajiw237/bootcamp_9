@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aji Waluyo - Web Developer Portfolio</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-orange: #ff7a00;
+            --primary-orange-hover: #e06b00;
+            --primary-orange-light: #fff0e0;
+            --dark-navy: #1a1e21;
+            --light-bg: #fafafa;
+            --text-gray: #6c757d;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--dark-navy);
+            background-color: #ffffff;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Hover Effects & Buttons */
+        .btn-orange {
+            background-color: var(--primary-orange);
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-orange:hover {
+            background-color: var(--primary-orange-hover);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 122, 0, 0.3);
+        }
+
+        .btn-outline-orange {
+            border: 2px solid var(--primary-orange);
+            color: var(--primary-orange);
+            background: transparent;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-orange:hover, .btn-outline-orange.active {
+            background-color: var(--primary-orange);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Navbar Customization */
+        .navbar {
+            padding: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 24px;
+            color: var(--dark-navy);
+        }
+
+        .navbar-brand span {
+            color: var(--primary-orange);
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--dark-navy) !important;
+            margin-right: 15px;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-orange);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 80px 0 120px 0;
+            position: relative;
+        }
+
+        .hero-title {
+            font-weight: 800;
+            font-size: 54px;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            color: var(--primary-orange);
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        /* Avatar Container Matching the Template Picture precisely */
+        .hero-avatar-wrapper {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            margin: 0 auto;
+        }
+
+        .hero-avatar-bg {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 280px;
+            height: 280px;
+            background-color: #ffe8d2;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .hero-avatar-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 320px;
+            height: 320px;
+            object-fit: cover;
+            border-radius: 50%;
+            z-index: 2;
+            border: 8px solid #ffffff;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .social-links-hero a {
+            color: var(--dark-navy);
+            font-size: 20px;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .social-links-hero a:hover {
+            color: var(--primary-orange);
+        }
+
+        /* Decorative Elements in Task Image (+ signs) */
+        .deco-plus {
+            position: absolute;
+            font-size: 28px;
+            color: #4b6bfb;
+            font-weight: bold;
+        }
+
+        /* Section Styling */
+        .section-title {
+            font-weight: 800;
+            font-size: 36px;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background-color: var(--primary-orange);
+            margin: 10px auto 0 auto;
+            border-radius: 2px;
+        }
+
+        /* About Me Cards Customization */
+        .about-card {
+            background: #ffffff;
+            border: 1px solid #eaeaea;
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .about-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border-color: var(--primary-orange);
+        }
+
+        .about-icon-box {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-orange-light);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-orange);
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        /* Project Cards Styling */
+        .portfolio-card {
+            border: none;
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.02);
+            border: 1px solid #f1f1f1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+        }
+
+        .portfolio-img-wrapper {
+            position: relative;
+            overflow: hidden;
+            padding-top: 65%; /* Aspect Ratio */
+            background-color: #fafafa;
+        }
+
+        .portfolio-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-card:hover .portfolio-img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-badge {
+            background-color: var(--primary-orange-light);
+            color: var(--primary-orange);
+            font-weight: 600;
+            font-size: 12px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        /* Testimonials Carousel Section */
+        .testimonial-section {
+            background-color: #fffaf5;
+            padding: 80px 0;
+        }
+
+        .carousel-indicators [data-bs-target] {
+            background-color: var(--primary-orange);
+        }
+
+        /* Contact Details Highlight Footer */
+        .footer-banner {
+            background-color: var(--dark-navy);
+            color: #ffffff;
+            padding: 60px 0 30px 0;
+        }
+
+        .footer-link {
+            color: #a0aec0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--primary-orange);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- DECORATIVE PLUS SIGNS (from the assignment design context) -->
+    <span class="deco-plus" style="top: 15%; left: 8%; opacity: 0.7;">+</span>
+    <span class="deco-plus" style="top: 25%; right: 12%; opacity: 0.7;">+</span>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="#">AJI<span>UX</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About Me</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">My Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#testimonialCarousel">Testimonials</a></li>
+                    <li class="nav-item">
+                        <button class="btn btn-orange ms-lg-3" data-bs-toggle="modal" data-bs-target="#contactModal">
+                            Download CV
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center py-5">
+                <!-- Left Details -->
+                <div class="col-lg-6 text-center text-lg-start mb-5 mb-lg-0">
+                    <p class="hero-subtitle">Hi I am</p>
+                    <h4 class="fw-bold mb-1" style="color: var(--primary-orange)">Aji Waluyo</h4>
+                    <h1 class="hero-title mb-4">Web <br class="d-none d-lg-block">Developer</h1>
+                    <p class="text-gray mb-4 pe-lg-5" style="font-size: 16px; line-height: 1.8;">
+                        I am an enthusiastic Web Developer specializing in designing and building modern, functional, and highly responsive user experiences. Let's make your digital ideas a reality together!
+                    </p>
+                    <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3">
+                        <button class="btn btn-orange" data-bs-toggle="modal" data-bs-target="#contactModal">
+                            Hire Me
+                        </button>
+                        <a href="#projects" class="btn btn-outline-orange">View Work</a>
+                    </div>
+                </div>
+                <!-- Right Side Avatar Card with Orange Frame Backing -->
+                <div class="col-lg-6 text-center">
+                    <div class="hero-avatar-wrapper mb-4">
+                        <div class="hero-avatar-bg"></div>
+                        <!-- High-quality image portrait representing "Aji Waluyo" as a developer with an automated fallback -->
+                        <img class="hero-avatar-img" 
+                             src="/sesi1/me.jpeg" 
+                             alt="Aji Waluyo Developer Portrait" 
+                             onerror="this.onerror=null; this.src='https://placehold.co/320x320/ff7a00/ffffff?text=Aji+Waluyo'">
+                    </div>
+                    <!-- Social Icons alignment exactly matching layout sample -->
+                    <div class="social-links-hero d-flex justify-content-center mt-3">
+                        <a href="https://github.com" target="_blank" title="Github"><i class="bi bi-github"></i></a>
+                        <a href="https://instagram.com" target="_blank" title="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="https://linkedin.com" target="_blank" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT ME SECTION -->
+    <section id="about" class="py-5 bg-light">
+        <div class="container py-4">
+            <div class="text-center mb-5">
+                <h2 class="section-title">About Me</h2>
+                <p class="text-muted mx-auto mt-2" style="max-width: 600px;">
+                    Passionate about clean code, semantic structures, and gorgeous frontend layout styles. Here are my credentials at a glance.
+                </p>
+            </div>
+
+            <!-- About Grid Exactly matching Layout in Tugas landingpage.jpg -->
+            <div class="row g-4 justify-content-center">
+                <!-- Card 1: Full Name -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="about-card d-flex align-items-start">
+                        <div class="about-icon-box me-3">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-1">Full Name</h5>
+                            <p class="text-muted mb-0">Aji Waluyo</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 2: Education -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="about-card d-flex align-items-start">
+                        <div class="about-icon-box me-3">
+                            <i class="bi bi-mortarboard-fill"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-1">Education</h5>
+                            <p class="text-muted mb-0">Computer Science / IT</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 3: Occupation -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="about-card d-flex align-items-start">
+                        <div class="about-icon-box me-3">
+                            <i class="bi bi-briefcase-fill"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-1">Occupation</h5>
+                            <p class="text-muted mb-0">Web Developer & Student</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 4: Contact -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="about-card d-flex align-items-start">
+                        <div class="about-icon-box me-3">
+                            <i class="bi bi-telephone-fill"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-1">Contact</h5>
+                            <p class="text-muted mb-0">Ajiw6836@gmail.com</p>
+                            <p class="text-muted mb-0" style="font-size: 13px;">+62 856 0611 9969</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 5: Hobbies -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="about-card d-flex align-items-start">
+                        <div class="about-icon-box me-3">
+                            <i class="bi bi-heart-fill"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-1">Hobbies</h5>
+                            <p class="text-muted mb-0">Reading, Coding, Traveling</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 6: Address -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="about-card d-flex align-items-start">
+                        <div class="about-icon-box me-3">
+                            <i class="bi bi-geo-alt-fill"></i>
+                        </div>
+                        <div>
+                            <h5 class="fw-bold mb-1">Address</h5>
+                            <p class="text-muted mb-0">Mawar Street No. 123, Jakarta, ID</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO / MY PROJECTS SECTION -->
+    <section id="projects" class="py-5">
+        <div class="container py-4">
+            <div class="text-center mb-5">
+                <h2 class="section-title">My Projects</h2>
+                <p class="text-muted mx-auto mt-2" style="max-width: 600px;">
+                    Take a look at some of my recent web development projects and interactive dashboard designs.
+                </p>
+
+                <!-- Project Filters -->
+                <div class="d-flex flex-wrap justify-content-center gap-2 mt-4" id="project-filters">
+                    <button class="btn btn-outline-orange active" data-filter="all">All</button>
+                    <button class="btn btn-outline-orange" data-filter="uiux">UI/UX</button>
+                    <button class="btn btn-outline-orange" data-filter="web">Web Design</button>
+                    <button class="btn btn-outline-orange" data-filter="app">App Design</button>
+                    <button class="btn btn-outline-orange" data-filter="graphic">Graphic Design</button>
+                </div>
+            </div>
+
+            <!-- Project Cards Grid with Real Image Tags -->
+            <div class="row g-4" id="projects-grid">
+                <!-- Project 1 -->
+                <div class="col-md-6 col-lg-4 project-item" data-category="web">
+                    <div class="portfolio-card">
+                        <div class="portfolio-img-wrapper">
+                            <img class="portfolio-img" 
+                                 src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=500&q=80" 
+                                 alt="AirCalling Landing Page Mockup"
+                                 onerror="this.onerror=null; this.src='https://placehold.co/500x350/ffe8d2/ff7a00?text=Web+Design'">
+                        </div>
+                        <div class="p-4 flex-grow-1 d-flex flex-column justify-content-between">
+                            <div>
+                                <span class="portfolio-badge mb-2">Web Design</span>
+                                <h5 class="fw-bold my-2">AirCalling Landing Page</h5>
+                                <p class="text-muted small">Modern responsive SaaS product experience built with modular container grids.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="col-md-6 col-lg-4 project-item" data-category="uiux">
+                    <div class="portfolio-card">
+                        <div class="portfolio-img-wrapper">
+                            <img class="portfolio-img" 
+                                 src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=500&q=80" 
+                                 alt="Business Landing Page Mockup"
+                                 onerror="this.onerror=null; this.src='https://placehold.co/500x350/ffe8d2/ff7a00?text=UI+UX+Design'">
+                        </div>
+                        <div class="p-4 flex-grow-1 d-flex flex-column justify-content-between">
+                            <div>
+                                <span class="portfolio-badge mb-2">UI/UX</span>
+                                <h5 class="fw-bold my-2">Business Landing Page</h5>
+                                <p class="text-muted small">Clean, corporate professional aesthetics customized for corporate branding assets.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="col-md-6 col-lg-4 project-item" data-category="app">
+                    <div class="portfolio-card">
+                        <div class="portfolio-img-wrapper">
+                            <img class="portfolio-img" 
+                                 src="https://images.unsplash.com/photo-1563013544-824ae1d704d3?auto=format&fit=crop&w=500&q=80" 
+                                 alt="Ecom Web Page Mockup"
+                                 onerror="this.onerror=null; this.src='https://placehold.co/500x350/ffe8d2/ff7a00?text=App+Design'">
+                        </div>
+                        <div class="p-4 flex-grow-1 d-flex flex-column justify-content-between">
+                            <div>
+                                <span class="portfolio-badge mb-2">App Design</span>
+                                <h5 class="fw-bold my-2">Ecom Web Page Design</h5>
+                                <p class="text-muted small">E-commerce application layout highlighting optimized store flows and fast loading speeds.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CAROUSEL TESTIMONIAL COMPONENT (Requirement #4) -->
+    <section class="testimonial-section">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title">Client Testimonials</h2>
+                <p class="text-muted">What partners say about working with Aji Waluyo</p>
+            </div>
+
+            <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators" style="bottom: -50px;">
+                    <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0" class="active"></button>
+                    <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="1"></button>
+                    <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="2"></button>
+                </div>
+                <div class="carousel-inner text-center pb-5">
+                    <!-- Slide 1 -->
+                    <div class="carousel-item active">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <i class="bi bi-quote fs-1 text-warning"></i>
+                                <p class="fs-5 italic mt-3 text-muted">
+                                    "Aji is an outstanding developer. The landing page he delivered for us is pixel-perfect, highly responsive across all devices, and was completed right on schedule!"
+                                </p>
+                                <h5 class="fw-bold mb-1 mt-4">Budi Prasetyo</h5>
+                                <span class="text-orange" style="color: var(--primary-orange);">CEO, TechCorp Indonesia</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="carousel-item">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <i class="bi bi-quote fs-1 text-warning"></i>
+                                <p class="fs-5 italic mt-3 text-muted">
+                                    "Highly satisfied with our collaboration with Aji Waluyo. The Bootstrap grid alignments and responsive styles perfectly match the creative wireframe briefs we supplied."
+                                </p>
+                                <h5 class="fw-bold mb-1 mt-4">Siti Aminah</h5>
+                                <span class="text-orange" style="color: var(--primary-orange);">Product Designer, CreativeLab</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="carousel-item">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <i class="bi bi-quote fs-1 text-warning"></i>
+                                <p class="fs-5 italic mt-3 text-muted">
+                                    "Very professional and excellent communication during development. He created an impressive modern portfolio that loads lightning-fast."
+                                </p>
+                                <h5 class="fw-bold mb-1 mt-4">Rian Hidayat</h5>
+                                <span class="text-orange" style="color: var(--primary-orange);">Manager, Global Dev</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Carousel Controls -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER WITH CONTACT INFORMATION -->
+    <footer class="footer-banner">
+        <div class="container">
+            <div class="row py-4 g-4 align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <h3 class="fw-bold">AJI<span style="color: var(--primary-orange)">UX</span></h3>
+                    <p class="text-muted mt-2 mb-0">Professional Web Developer portfolio landing page. Powered by Bootstrap 5 Grid Layout.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-1"><i class="bi bi-envelope-fill text-warning me-2"></i>Ajiw6836@gmail.com</p>
+                    <p class="mb-3"><i class="bi bi-whatsapp text-success me-2"></i>+62 856 0611 9969</p>
+                    <div class="d-flex justify-content-center justify-content-md-end gap-3">
+                        <a href="#" class="footer-link">Home</a>
+                        <a href="#about" class="footer-link">About</a>
+                        <a href="#projects" class="footer-link">Projects</a>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-secondary">
+            <div class="row pt-2 text-center text-muted small">
+                <div class="col-12">
+                    <p>&copy; 2026 Aji Waluyo. All Rights Reserved. Designed in compliance with assignment guidelines.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE CONTACT MODAL (Requirement #4) -->
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title fw-bold" id="contactModalLabel">Contact Aji Waluyo</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-shadow="none" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="text-center mb-4">
+                        <div class="about-icon-box mx-auto">
+                            <i class="bi bi-chat-dots-fill"></i>
+                        </div>
+                        <h6 class="fw-bold">Send a Message / Job Proposal</h6>
+                        <p class="text-muted small">Reach out to me directly using WhatsApp or Email below.</p>
+                    </div>
+
+                    <!-- Direct Quick Actions -->
+                    <div class="d-grid gap-2 mb-4">
+                        <a href="https://wa.me/6285606119969?text=Hello%20Aji%20Waluyo,%20I%20am%20interested%20in%20working%20with%20you" target="_blank" class="btn btn-success p-3 fw-bold">
+                            <i class="bi bi-whatsapp me-2"></i> Chat on WhatsApp
+                        </a>
+                        <a href="mailto:Ajiw6836@gmail.com?subject=Web%20Developer%20Inquiry" class="btn btn-orange p-3 fw-bold">
+                            <i class="bi bi-envelope me-2"></i> Send Official Email
+                        </a>
+                    </div>
+
+                    <div class="border-top pt-3">
+                        <p class="text-center text-muted small mb-0">Contact Information:</p>
+                        <p class="text-center fw-bold text-dark mb-0">Ajiw6836@gmail.com</p>
+                        <p class="text-center fw-bold text-dark">+62 856-0611-9969</p>
+                    </div>
+                </div>
+                <div class="modal-footer bg-light justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom Project Interactive Filter Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterButtons = document.querySelectorAll('#project-filters button');
+            const projectItems = document.querySelectorAll('.project-item');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to current button
+                    button.classList.add('active');
+
+                    const filterValue = button.getAttribute('data-filter');
+
+                    projectItems.forEach(item => {
+                        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                            item.style.display = 'block';
+                            // Fade in effect
+                            item.style.opacity = '0';
+                            setTimeout(() => {
+                                item.style.opacity = '1';
+                                item.style.transition = 'opacity 0.4s ease';
+                            }, 100);
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
