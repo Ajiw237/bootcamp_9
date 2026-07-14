@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aji Waluyo - Web Developer Portfolio</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Google Fonts (Poppins) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-orange: #ff7a00;
+            --primary-orange-hover: #e06b00;
+            --dark-blue: #0f172a;
+            --light-bg: #f8fafc;
+            --text-muted: #64748b;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark-blue);
+            background-color: #ffffff;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Navbar Customization */
+        .navbar {
+            background-color: #ffffff;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            color: var(--dark-blue);
+        }
+
+        .navbar-brand span {
+            color: var(--primary-orange);
+            background: rgba(255, 122, 0, 0.1);
+            padding: 2px 8px;
+            border-radius: 6px;
+            margin-left: 2px;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--dark-blue) !important;
+            margin: 0 10px;
+            transition: color 0.2s ease;
+            position: relative;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-orange) !important;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-orange);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+
+        .btn-orange {
+            background-color: var(--primary-orange);
+            color: white !important;
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 10px 24px;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px rgba(255, 122, 0, 0.3);
+        }
+
+        .btn-orange:hover {
+            background-color: var(--primary-orange-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 122, 0, 0.4);
+        }
+
+        .btn-outline-orange {
+            background-color: transparent;
+            color: var(--primary-orange);
+            border: 2px solid var(--primary-orange);
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 10px 24px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-orange:hover {
+            background-color: var(--primary-orange);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 120px 0 80px 0;
+            background: radial-gradient(circle at 90% 10%, rgba(255, 122, 0, 0.05) 0%, transparent 50%);
+        }
+
+        .hero-title-greeting {
+            color: var(--primary-orange);
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .hero-title-name {
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: var(--primary-orange);
+            margin-bottom: 5px;
+        }
+
+        .hero-title-role {
+            font-weight: 800;
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 25px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title-role {
+                font-size: 2.5rem;
+            }
+            .hero-section {
+                padding: 100px 0 50px 0;
+                text-align: center;
+            }
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        .hero-avatar-container {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            margin: 0 auto;
+        }
+
+        .hero-avatar-bg {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary-orange);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .hero-avatar-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid white;
+            z-index: 2;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #f1f5f9;
+            color: var(--dark-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background-color: var(--primary-orange);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Sections General */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-subtitle {
+            font-weight: 700;
+            color: var(--primary-orange);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .section-title {
+            font-weight: 800;
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary-orange);
+            border-radius: 2px;
+        }
+
+        /* About Me Section */
+        .info-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 122, 0, 0.3);
+            box-shadow: 0 10px 25px rgba(255, 122, 0, 0.05);
+        }
+
+        .info-icon-wrapper {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            background-color: rgba(255, 122, 0, 0.1);
+            color: var(--primary-orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+
+        .info-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+            font-weight: 600;
+        }
+
+        .info-value {
+            font-weight: 600;
+            color: var(--dark-blue);
+            margin-bottom: 0;
+            font-size: 0.95rem;
+            word-break: break-all;
+        }
+
+        /* Projects Section */
+        .project-filters {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background-color: transparent;
+            border: 1px solid #cbd5e1;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--primary-orange);
+            border-color: var(--primary-orange);
+            color: white;
+            box-shadow: 0 4px 10px rgba(255, 122, 0, 0.2);
+        }
+
+        .project-card {
+            background-color: white;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            border-color: rgba(255, 122, 0, 0.2);
+        }
+
+        .project-img-container {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+            background: #cbd5e1;
+        }
+
+        .project-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-img {
+            transform: scale(1.05);
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .project-content {
+            padding: 20px;
+        }
+
+        .project-category {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--primary-orange);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .project-title {
+            font-weight: 700;
+            font-size: 1.15rem;
+            margin-bottom: 12px;
+            color: var(--dark-blue);
+        }
+
+        /* Services Custom List */
+        .service-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px 30px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary-orange);
+            box-shadow: 0 15px 30px rgba(255, 122, 0, 0.05);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--primary-orange);
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        /* Contact & CTA Footer */
+        .footer {
+            background-color: var(--dark-blue);
+            color: #94a3b8;
+            padding: 50px 0 30px 0;
+            font-size: 0.9rem;
+        }
+
+        .footer-brand {
+            font-weight: 800;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .footer-brand span {
+            color: var(--primary-orange);
+        }
+
+        .footer h5 {
+            color: white;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .footer-link {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.2s ease;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .footer-link:hover {
+            color: var(--primary-orange);
+            padding-left: 5px;
+        }
+
+        /* Homework Helper Box styles */
+        .hw-helper {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-top: 4px solid var(--primary-orange);
+            color: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-top: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        /* Modal styling */
+        .modal-content {
+            border-radius: 16px;
+            border: none;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            background-color: var(--dark-blue);
+            color: white;
+            border-bottom: none;
+        }
+
+        .modal-header .btn-close {
+            filter: invert(1) grayscale(1) brightness(2);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navbar Section (Responsive Sidebar Offcanvas for Mobile as per requested screenshot reference) -->
+    <nav class="navbar navbar-expand-lg sticky-top py-3">
+        <div class="container">
+            <a class="navbar-brand" href="#">AJI<span>UX</span></a>
+            
+            <!-- Offcanvas mobile trigger button -->
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                <span class="fs-2 text-dark"><i class="bi bi-list"></i></span>
+            </button>
+
+            <!-- Responsive Navigation -->
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header bg-dark text-white">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">AJI<span>UX</span> Navigation</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#home" data-bs-dismiss="offcanvas">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about" data-bs-dismiss="offcanvas">About Me</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#services" data-bs-dismiss="offcanvas">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#projects" data-bs-dismiss="offcanvas">Projects</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact" data-bs-dismiss="offcanvas">Contact</a>
+                        </li>
+                    </ul>
+                    <div class="d-flex mt-3 mt-lg-0">
+                        <!-- Homework Popup Trigger button -->
+                        <button class="btn btn-orange w-100 w-lg-auto" data-bs-toggle="modal" data-bs-target="#cvModal">
+                            <i class="bi bi-cloud-arrow-down-fill me-2"></i>Download CV
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center flex-column-reverse flex-md-row g-5">
+                <div class="col-lg-7 text-start">
+                    <p class="hero-title-greeting">HI I am</p>
+                    <h3 class="hero-title-name">Aji Waluyo</h3>
+                    <h1 class="hero-title-role">Web Developer</h1>
+                    <p class="text-secondary mb-4 fs-5 leading-relaxed" style="max-width: 600px;">
+                        Passionate software developer from Indonesia specializing in crafting high-performance, beautiful, and responsive web experiences. Let's convert your complex challenges into simple, elegant digital systems.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <!-- Modal Trigger for Contact Form -->
+                        <button class="btn btn-orange" data-bs-toggle="modal" data-bs-target="#hireMeModal">
+                            <i class="bi bi-envelope-fill me-2"></i>Hire Me
+                        </button>
+                        <a href="#projects" class="btn btn-outline-orange">View Portfolio</a>
+                    </div>
+                    <!-- Social Links matching screenshot layout -->
+                    <div class="social-links mt-4">
+                        <a href="https://github.com" target="_blank" class="social-icon"><i class="bi bi-github"></i></a>
+                        <a href="https://linkedin.com" target="_blank" class="social-icon"><i class="bi bi-linkedin"></i></a>
+                        <a href="https://instagram.com" target="_blank" class="social-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="https://twitter.com" target="_blank" class="social-icon"><i class="bi bi-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="hero-avatar-container">
+                        <div class="hero-avatar-bg"></div>
+                        <!-- Real profile image with placehold.co onerror backup fallback -->
+                        <img class="hero-avatar-img" 
+                             src="/sesi1/me.jpeg" 
+                             alt="Aji Waluyo Profile Picture"
+                             onerror="this.src='https://placehold.co/320x320/0f172a/ff7a00?text=Aji+Waluyo'">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="bg-light">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Get To Know Me</span>
+                <h2 class="section-title">About Me</h2>
+                <p class="text-secondary mt-3 mx-auto" style="max-width: 650px;">
+                    I construct strong digital projects that fuse beautiful UI architecture with flawless web operations. Combining creative visual logic with solid backend frameworks.
+                </p>
+            </div>
+
+            <!-- Profile Info Grid -->
+            <div class="row g-4 mt-2">
+                <!-- Info Item 1: Full Name -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="info-card">
+                        <div class="info-icon-wrapper">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+                        <div>
+                            <p class="info-label">Full Name</p>
+                            <p class="info-value">Aji Waluyo</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Info Item 2: Education -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="info-card">
+                        <div class="info-icon-wrapper">
+                            <i class="bi bi-mortarboard-fill"></i>
+                        </div>
+                        <div>
+                            <p class="info-label">Education</p>
+                            <p class="info-value">Universitas Gadjah Mada</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info Item 3: Occupation -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="info-card">
+                        <div class="info-icon-wrapper">
+                            <i class="bi bi-briefcase-fill"></i>
+                        </div>
+                        <div>
+                            <p class="info-label">Occupation</p>
+                            <p class="info-value">Web Developer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info Item 4: Contact Email -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="info-card">
+                        <div class="info-icon-wrapper">
+                            <i class="bi bi-envelope-at-fill"></i>
+                        </div>
+                        <div>
+                            <p class="info-label">Contact Email</p>
+                            <p class="info-value">Ajiw6836@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info Item 5: Hobbies -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="info-card">
+                        <div class="info-icon-wrapper">
+                            <i class="bi bi-controller"></i>
+                        </div>
+                        <div>
+                            <p class="info-label">Hobbies</p>
+                            <p class="info-value">Coding, Gaming, Exploring</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info Item 6: Address -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="info-card">
+                        <div class="info-icon-wrapper">
+                            <i class="bi bi-geo-alt-fill"></i>
+                        </div>
+                        <div>
+                            <p class="info-label">Location</p>
+                            <p class="info-value">Jakarta, Indonesia</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">What I Do Best</span>
+                <h2 class="section-title">My Services</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="service-card text-center">
+                        <div class="service-icon">
+                            <i class="bi bi-code-square"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Web Development</h4>
+                        <p class="text-secondary">Building responsive, high-speed corporate, landing, and dynamic web portals utilizing modern architectural standards.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="service-card text-center">
+                        <div class="service-icon">
+                            <i class="bi bi-palette"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">UI/UX Design</h4>
+                        <p class="text-secondary">Designing pixel-perfect wireframes and highly functional interactive mockups crafted for intuitive user navigation flows.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="service-card text-center">
+                        <div class="service-icon">
+                            <i class="bi bi-phone"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Responsive Apps</h4>
+                        <p class="text-secondary">Adapting interface systems beautifully across smaller touch devices, tablets, and massive desktop screens flawlessly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="bg-light">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Portfolio Showcase</span>
+                <h2 class="section-title">My Projects</h2>
+                <p class="text-secondary mt-3">Filter projects below to see specific areas of specialization.</p>
+            </div>
+
+            <!-- Project Filters -->
+            <div class="project-filters">
+                <button class="filter-btn active" onclick="filterProjects('all', this)">All</button>
+                <button class="filter-btn" onclick="filterProjects('web', this)">Web Design</button>
+                <button class="filter-btn" onclick="filterProjects('ui', this)">UI/UX</button>
+                <button class="filter-btn" onclick="filterProjects('app', this)">App Design</button>
+            </div>
+
+            <!-- Project Grid -->
+            <div class="row g-4" id="projectsContainer">
+                
+                <!-- Project 1 (Web) -->
+                <div class="col-md-6 col-lg-4 project-item web">
+                    <div class="project-card">
+                        <div class="project-img-container">
+                            <img class="project-img" 
+                                 src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=500" 
+                                 alt="AirCalling Landing Page Screenshot"
+                                 onerror="this.src='https://placehold.co/500x350/1e293b/ff7a00?text=AirCalling+Landing+Page'">
+                            <div class="project-overlay">
+                                <button class="btn btn-orange btn-sm" onclick="openProjectModal('AirCalling Landing Page', 'A high-converting calling service page built using modern CSS grids, containing responsive features, neat animation libraries, and a premium clean hero section layout.', 'Web Design', 'Bootstrap 5, HTML5, Vanilla JS')">View Details</button>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <span class="project-category">Web Design</span>
+                            <h5 class="project-title">AirCalling Landing Page Design</h5>
+                            <button class="btn btn-sm btn-outline-orange w-100" onclick="openProjectModal('AirCalling Landing Page', 'A high-converting calling service page built using modern CSS grids, containing responsive features, neat animation libraries, and a premium clean hero section layout.', 'Web Design', 'Bootstrap 5, HTML5, Vanilla JS')">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 (UI) -->
+                <div class="col-md-6 col-lg-4 project-item ui">
+                    <div class="project-card">
+                        <div class="project-img-container">
+                            <img class="project-img" 
+                                 src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&q=80&w=500" 
+                                 alt="Business Landing Page Design Screenshot"
+                                 onerror="this.src='https://placehold.co/500x350/1e293b/ff7a00?text=Business+Landing+Page'">
+                            <div class="project-overlay">
+                                <button class="btn btn-orange btn-sm" onclick="openProjectModal('Business Landing Page', 'Corporate branding portfolio design detailing digital operations, consulting structures, services, interactive FAQs, and fully optimized elements.', 'UI/UX Design', 'Figma, Tailwind, CSS')">View Details</button>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <span class="project-category">UI/UX Design</span>
+                            <h5 class="project-title">Business Landing Page Design</h5>
+                            <button class="btn btn-sm btn-outline-orange w-100" onclick="openProjectModal('Business Landing Page', 'Corporate branding portfolio design detailing digital operations, consulting structures, services, interactive FAQs, and fully optimized elements.', 'UI/UX Design', 'Figma, Tailwind, CSS')">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 (Web) -->
+                <div class="col-md-6 col-lg-4 project-item web">
+                    <div class="project-card">
+                        <div class="project-img-container">
+                            <img class="project-img" 
+                                 src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&q=80&w=500" 
+                                 alt="Ecom Web Page Screenshot"
+                                 onerror="this.src='https://placehold.co/500x350/1e293b/ff7a00?text=Ecom+Web+Page'">
+                            <div class="project-overlay">
+                                <button class="btn btn-orange btn-sm" onclick="openProjectModal('E-Commerce Hub Portal', 'Full-stack store portal demonstrating interactive filtering, quick cart overlays, clean detail tables, responsive grids, and responsive dark modes.', 'Web Design', 'Sass, JavaScript, Webpack')">View Details</button>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <span class="project-category">Web Design</span>
+                            <h5 class="project-title">Ecom Web Page Design</h5>
+                            <button class="btn btn-sm btn-outline-orange w-100" onclick="openProjectModal('E-Commerce Hub Portal', 'Full-stack store portal demonstrating interactive filtering, quick cart overlays, clean detail tables, responsive grids, and responsive dark modes.', 'Web Design', 'Sass, JavaScript, Webpack')">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 (App) -->
+                <div class="col-md-6 col-lg-4 project-item app">
+                    <div class="project-card">
+                        <div class="project-img-container">
+                            <img class="project-img" 
+                                 src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=500" 
+                                 alt="Mobile App Dashboard Screenshot"
+                                 onerror="this.src='https://placehold.co/500x350/1e293b/ff7a00?text=Mobile+App+Dashboard'">
+                            <div class="project-overlay">
+                                <button class="btn btn-orange btn-sm" onclick="openProjectModal('Mobile App Dashboard', 'A beautiful financial mobile tracking app featuring intuitive interactive charts, sleek dark mode themes, and beautiful profile setups.', 'App Design', 'React Native, Node.js')">View Details</button>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <span class="project-category">App Design</span>
+                            <h5 class="project-title">Finance Tracking App Layout</h5>
+                            <button class="btn btn-sm btn-outline-orange w-100" onclick="openProjectModal('Mobile App Dashboard', 'A beautiful financial mobile tracking app featuring intuitive interactive charts, sleek dark mode themes, and beautiful profile setups.', 'App Design', 'React Native, Node.js')">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Let's Work Together</span>
+                <h2 class="section-title">Get In Touch</h2>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="card shadow-sm border-0 rounded-4 overflow-hidden">
+                        <div class="row g-0">
+                            <!-- Left Info Column -->
+                            <div class="col-md-5 bg-dark text-white p-5 d-flex flex-column justify-content-between">
+                                <div>
+                                    <h4 class="fw-bold text-white mb-3">Direct Contact Details</h4>
+                                    <p class="text-secondary">Have an interesting project in mind? Reach out to me directly anytime, I am available!</p>
+                                    
+                                    <div class="mt-4">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <i class="bi bi-geo-alt-fill text-orange fs-4 me-3" style="color: var(--primary-orange);"></i>
+                                            <span>Jakarta, Indonesia</span>
+                                        </div>
+                                        <div class="d-flex align-items-center mb-3">
+                                            <i class="bi bi-envelope-fill text-orange fs-4 me-3" style="color: var(--primary-orange);"></i>
+                                            <span>Ajiw6836@gmail.com</span>
+                                        </div>
+                                        <div class="d-flex align-items-center mb-3">
+                                            <i class="bi bi-whatsapp text-orange fs-4 me-3" style="color: var(--primary-orange);"></i>
+                                            <span>085606119969</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-4">
+                                    <h6 class="text-uppercase tracking-wider text-secondary mb-3">Response Time Guarantee</h6>
+                                    <p class="small text-secondary mb-0"><i class="bi bi-clock-fill me-2"></i>Typically responds in less than 24 hours.</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Right Form Column -->
+                            <div class="col-md-7 p-5 bg-white">
+                                <h4 class="fw-bold mb-4">Send a Message</h4>
+                                <form id="contactForm" onsubmit="handleContactSubmit(event)">
+                                    <div class="mb-3">
+                                        <label class="form-label font-semibold">Your Name</label>
+                                        <input type="text" class="form-control" placeholder="John Doe" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label font-semibold">Your Email</label>
+                                        <input type="email" class="form-control" placeholder="john@example.com" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label font-semibold">Message Description</label>
+                                        <textarea class="form-control" rows="4" placeholder="Describe your web design or development project..." required></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-orange w-100">Send Inquiry</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Git Helper Box (Task #4: Simpan ke Github Helper) -->
+                    <div class="hw-helper">
+                        <div class="d-flex align-items-start gap-3">
+                            <div class="fs-1 text-warning"><i class="bi bi-github"></i></div>
+                            <div>
+                                <h5 class="fw-bold text-white mb-2">GitHub Upload Companion Panel</h5>
+                                <p class="text-secondary mb-3">Task #4 of your assignment requires you to save this project into GitHub. Click below to copy the specific shell commands to initiate, stage, commit, and push this portfolio layout instantly to your repository!</p>
+                                <div class="d-flex flex-wrap gap-2">
+                                    <button class="btn btn-sm btn-outline-light" onclick="copyGitCommand('git init')">1. Initialize Git</button>
+                                    <button class="btn btn-sm btn-outline-light" onclick="copyGitCommand('git add index.html')">2. Stage Files</button>
+                                    <button class="btn btn-sm btn-outline-light" onclick="copyGitCommand('git commit -m &quot;feat: complete Bootstrap portfolio homework&quot;')">3. Commit Assignment</button>
+                                    <button class="btn btn-sm btn-outline-light" id="customGitPushBtn" onclick="openGitInstructionsModal()">4. Full Upload Guide</button>
+                                </div>
+                                <div id="gitToast" class="mt-2 text-warning d-none" style="font-size: 0.85rem;">
+                                    <i class="bi bi-check-circle-fill me-1"></i> Command copied to clipboard! Paste it inside your project terminal folder.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container text-center text-md-start">
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="footer-brand">AJI<span>UX</span></div>
+                    <p style="max-width: 400px;">A professional web design and programming layout homework solution matching the exact design and structure parameters requested in "Tugas boostrap.jpg".</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Quick Links</h5>
+                    <a href="#home" class="footer-link">Home</a>
+                    <a href="#about" class="footer-link">About Me</a>
+                    <a href="#services" class="footer-link">Services</a>
+                    <a href="#projects" class="footer-link">Projects</a>
+                </div>
+                <div class="col-md-3">
+                    <h5>Connect With Me</h5>
+                    <div class="d-flex gap-2">
+                        <a href="https://github.com" target="_blank" class="btn btn-sm btn-outline-light"><i class="bi bi-github"></i></a>
+                        <a href="https://linkedin.com" target="_blank" class="btn btn-sm btn-outline-light"><i class="bi bi-linkedin"></i></a>
+                        <a href="https://instagram.com" target="_blank" class="btn btn-sm btn-outline-light"><i class="bi bi-instagram"></i></a>
+                    </div>
+                    <p class="mt-3 mb-0 text-secondary" style="font-size: 0.8rem;">Design adapted for student assignment submission.</p>
+                </div>
+            </div>
+            <hr class="my-4 border-secondary">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center small text-secondary">
+                <p class="mb-0">&copy; 2026 Aji Waluyo. All rights reserved.</p>
+                <p class="mb-0">Designed and built with Bootstrap 5</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== POPUP MODALS (TASK #3 COMPLIANCE) ==================== -->
+
+    <!-- Modal 1: Project Details Dynamic Popup -->
+    <div class="modal fade" id="projectDetailsModal" tabindex="-1" aria-labelledby="projectDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="modalProjectTitle">Project Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <span class="badge bg-warning text-dark mb-2" id="modalProjectCategory">Web Design</span>
+                    <p id="modalProjectDesc" class="text-secondary mt-2">Description</p>
+                    <hr>
+                    <div class="mb-3">
+                        <span class="fw-bold d-block mb-1">Stack Used:</span>
+                        <code class="text-dark bg-light p-2 rounded d-inline-block w-100" id="modalProjectTech">HTML5, Bootstrap, CSS3</code>
+                    </div>
+                    <button class="btn btn-orange w-100" data-bs-dismiss="modal">Close Preview</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2: Download CV Modal -->
+    <div class="modal fade" id="cvModal" tabindex="-1" aria-labelledby="cvModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="cvModalLabel">Download Curriculum Vitae</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4 text-center">
+                    <i class="bi bi-file-earmark-pdf-fill text-danger fs-1 mb-3 d-block"></i>
+                    <h5 class="fw-bold">Aji Waluyo - CV Document</h5>
+                    <p class="text-secondary small">Choose your preferred layout format below to download or view the resume of Aji Waluyo instantly.</p>
+                    <div class="d-flex flex-column gap-2 mt-4">
+                        <button class="btn btn-orange" onclick="triggerDownloadNotification('English Standard Resume')">
+                            <i class="bi bi-download me-2"></i>Download (English Portfolio Version)
+                        </button>
+                        <button class="btn btn-outline-orange" onclick="triggerDownloadNotification('Bahasa Indonesia Resume')">
+                            <i class="bi bi-download me-2"></i>Download (Bahasa Indonesia Version)
+                        </button>
+                    </div>
+                    <div id="downloadNotice" class="mt-3 text-success d-none">
+                        <i class="bi bi-check-circle-fill me-1"></i> Starting mock resume download process...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3: Hire Me Popup -->
+    <div class="modal fade" id="hireMeModal" tabindex="-1" aria-labelledby="hireMeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="hireMeModalLabel">Hire Aji Waluyo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <p class="text-secondary mb-4">Please submit your basic information below to instantly start co-operation on your digital projects.</p>
+                    <form onsubmit="handleModalFormSubmit(event)">
+                        <div class="mb-3">
+                            <label class="form-label">Your Corporate Email Address</label>
+                            <input type="email" class="form-control" placeholder="client@company.com" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Project Budget Range</label>
+                            <select class="form-select">
+                                <option>$500 - $1,500</option>
+                                <option>$1,500 - $5,000</option>
+                                <option>$5,000+</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Project Objective</label>
+                            <textarea class="form-control" rows="3" placeholder="Explain your core milestones..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-orange w-100">Send Hiring Request</button>
+                    </form>
+                    <div id="modalSubmitNotice" class="mt-3 text-success d-none text-center">
+                        <i class="bi bi-check-circle-fill me-1"></i> Message sent successfully to <strong>Ajiw6836@gmail.com</strong>!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 4: GitHub Upload Tutorial Guide Popup -->
+    <div class="modal fade" id="gitGuideModal" tabindex="-1" aria-labelledby="gitGuideModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="gitGuideModalLabel"><i class="bi bi-github me-2"></i>GitHub Assignment Guide (Task #4)</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <h6 class="fw-bold text-dark mb-3">How to publish your assignment layout to GitHub:</h6>
+                    
+                    <ol class="lh-lg">
+                        <li>Create a free account at <a href="https://github.com" target="_blank">github.com</a> if you haven't yet.</li>
+                        <li>Click the <strong>"New Repository"</strong> button in your dashboard.</li>
+                        <li>Give it a name (e.g. <code>aji-waluyo-bootstrap-portfolio</code>) and make sure it is set to **Public**.</li>
+                        <li>Click **Create Repository**.</li>
+                        <li>Open your command prompt or terminal in the folder containing this <code>index.html</code> file and execute:
+                            <pre class="bg-light p-3 rounded mt-2 border text-dark">
+git init
+git add index.html
+git commit -m "feat: complete Bootstrap portfolio homework"
+git branch -M main
+git remote add origin https://github.com/YOUR_USERNAME/aji-waluyo-bootstrap-portfolio.git
+git push -u origin main</pre>
+                        </li>
+                        <li>Provide your homework repository URL link to your instructor to complete task 4 successfully!</li>
+                    </ol>
+
+                    <div class="alert alert-warning mb-0 mt-3 d-flex align-items-center" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill fs-4 me-3"></i>
+                        <div>
+                            Make sure to replace <code>YOUR_USERNAME</code> in step 5 with your actual registered GitHub profile username!
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-orange" data-bs-dismiss="modal">Got it, Let's do it!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle (Includes Popper.js for Offcanvas & Modals) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Project Cards Filtering Logic
+        function filterProjects(category, buttonElement) {
+            // Manage Active Class on buttons
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            buttonElement.classList.add('active');
+
+            // Show/Hide items dynamically with styling transitions
+            const items = document.querySelectorAll('.project-item');
+            items.forEach(item => {
+                if (category === 'all' || item.classList.contains(category)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Project details Modal launcher
+        function openProjectModal(title, description, category, techStack) {
+            document.getElementById('modalProjectTitle').innerText = title;
+            document.getElementById('modalProjectCategory').innerText = category;
+            document.getElementById('modalProjectDesc').innerText = description;
+            document.getElementById('modalProjectTech').innerText = techStack;
+            
+            const projectModal = new bootstrap.Modal(document.getElementById('projectDetailsModal'));
+            projectModal.show();
+        }
+
+        // Contact form submit logic
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const submitBtn = form.querySelector('button[type="submit"]');
+            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Sending...';
+
+            setTimeout(() => {
+                submitBtn.innerHTML = '<i class="bi bi-check-circle-fill me-2"></i>Inquiry Sent!';
+                submitBtn.classList.remove('btn-orange');
+                submitBtn.classList.add('btn-success');
+                
+                const toast = document.getElementById('gitToast');
+                toast.classList.remove('d-none', 'text-warning');
+                toast.classList.add('text-success');
+                toast.innerHTML = `<i class="bi bi-check-circle-fill me-1"></i> Form successfully processed for Aji Waluyo! An email inquiry has been simulated to Ajiw6836@gmail.com.`;
+                
+                form.reset();
+            }, 1200);
+        }
+
+        // Modal hire me submit trigger
+        function handleModalFormSubmit(event) {
+            event.preventDefault();
+            const notice = document.getElementById('modalSubmitNotice');
+            notice.classList.remove('d-none');
+            event.target.reset();
+            
+            setTimeout(() => {
+                notice.classList.add('d-none');
+                const modalEl = document.getElementById('hireMeModal');
+                const modalInstance = bootstrap.Modal.getInstance(modalEl);
+                if (modalInstance) {
+                    modalInstance.hide();
+                }
+            }, 3000);
+        }
+
+        // Mock Download script
+        function triggerDownloadNotification(fileName) {
+            const notice = document.getElementById('downloadNotice');
+            notice.innerHTML = `<i class="bi bi-arrow-down-circle-fill me-1"></i> Packaging <strong>${fileName}</strong>... download initialized successfully!`;
+            notice.classList.remove('d-none');
+            
+            setTimeout(() => {
+                notice.classList.add('d-none');
+                const modalEl = document.getElementById('cvModal');
+                const modalInstance = bootstrap.Modal.getInstance(modalEl);
+                if (modalInstance) {
+                    modalInstance.hide();
+                }
+            }, 2500);
+        }
+
+        // Helper Clipboard Function
+        function copyGitCommand(text) {
+            const tempInput = document.createElement("input");
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+
+            const toast = document.getElementById('gitToast');
+            toast.classList.remove('d-none', 'text-success');
+            toast.classList.add('text-warning');
+            toast.innerHTML = `<i class="bi bi-check-circle-fill me-1"></i> Command copied: <code>${text}</code>. Paste it into your local assignment folder directory!`;
+            
+            setTimeout(() => {
+                toast.classList.add('d-none');
+            }, 5000);
+        }
+
+        // Launch full guide modal
+        function openGitInstructionsModal() {
+            const gitModal = new bootstrap.Modal(document.getElementById('gitGuideModal'));
+            gitModal.show();
+        }
+    </script>
+</body>
+</html>
