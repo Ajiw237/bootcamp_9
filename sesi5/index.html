@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajovi_groceries - Fresh Online Supermarket</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+    <!-- Navigation Bar -->
+    <header class="bg-emerald-600 text-white shadow-md sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex justify-between items-center gap-4">
+            
+            <!-- Brand Logo -->
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="resetFilters()">
+                <div class="bg-amber-400 p-2.5 rounded-2xl text-slate-900 shadow-inner flex items-center justify-center">
+                    <i class="fa-solid fa-basket-shopping text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl sm:text-2xl font-black tracking-tight leading-none text-white">Ajovi_groceries</h1>
+                    <p class="text-[10px] text-emerald-100 font-medium tracking-wide uppercase">Fresh & Organic Everyday</p>
+                </div>
+            </div>
+
+            <!-- Quick Contacts & Cart Controls -->
+            <div class="flex items-center space-x-2 sm:space-x-4">
+                
+                <!-- Direct WhatsApp Contact Button -->
+                <a href="https://wa.me/6285606119969" target="_blank" class="hidden md:flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-semibold px-3 py-2 rounded-xl transition shadow-sm" title="Contact via WhatsApp">
+                    <i class="fa-brands fa-whatsapp text-lg text-green-300"></i>
+                    <span>085606119969</span>
+                </a>
+
+                <!-- Direct Email Contact Button -->
+                <a href="mailto:ajiw6836@gmail.com" class="hidden lg:flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-semibold px-3 py-2 rounded-xl transition shadow-sm" title="Email Us">
+                    <i class="fa-solid fa-envelope text-amber-300 text-sm"></i>
+                    <span>ajiw6836@gmail.com</span>
+                </a>
+
+                <!-- Add Product Button (Modal Trigger) -->
+                <button onclick="toggleAddProductModal()" class="bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold text-xs sm:text-sm px-3 sm:px-4 py-2 rounded-xl transition flex items-center gap-2 shadow">
+                    <i class="fa-solid fa-plus text-sm"></i>
+                    <span class="hidden sm:inline">Add Product</span>
+                </button>
+
+                <!-- Shopping Cart Button -->
+                <button onclick="toggleCartModal()" class="relative p-2.5 bg-emerald-700 hover:bg-emerald-800 rounded-xl transition flex items-center justify-center shadow">
+                    <i class="fa-solid fa-cart-shopping text-lg"></i>
+                    <span id="cart-count" class="absolute -top-1.5 -right-1.5 bg-amber-400 text-slate-900 font-black text-xs w-5 h-5 rounded-full flex items-center justify-center shadow border-2 border-emerald-600">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-grow w-full">
+        
+        <!-- Hero Banner with App Store Download Badges -->
+        <div class="bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-800 rounded-3xl p-6 sm:p-8 mb-8 text-white shadow-xl relative overflow-hidden">
+            <!-- Decorative background elements -->
+            <div class="absolute -right-10 -bottom-10 opacity-10 pointer-events-none">
+                <i class="fa-solid fa-apple-whole text-[240px]"></i>
+            </div>
+
+            <div class="relative z-10 max-w-3xl">
+                <span class="bg-emerald-900/60 text-emerald-200 text-xs px-3 py-1 rounded-full font-bold tracking-wider uppercase inline-block mb-3 border border-emerald-400/30">
+                    Welcome to Ajovi_groceries
+                </span>
+                <h2 class="text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight mb-3">
+                    Fresh Produce & Groceries Delivered To Your Doorstep
+                </h2>
+                <p class="text-emerald-100 text-sm sm:text-base leading-relaxed mb-6">
+                    Shop organic fruits, fresh vegetables, dairy, and essential daily goods. Quality guaranteed with instant order support via WhatsApp and Email!
+                </p>
+
+                <!-- Action Bar: Contact Links & Mobile App Store Download Buttons -->
+                <div class="flex flex-wrap items-center gap-3">
+                    
+                    <!-- App Store Download Button -->
+                    <a href="#" onclick="showDownloadNotice('App Store')" class="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2.5 rounded-xl flex items-center gap-3 shadow-md transition transform active:scale-95">
+                        <i class="fa-brands fa-apple text-2xl"></i>
+                        <div class="text-left">
+                            <div class="text-[9px] uppercase tracking-wider text-slate-400 font-medium">Download on the</div>
+                            <div class="text-xs font-bold leading-tight">App Store</div>
+                        </div>
+                    </a>
+
+                    <!-- Google Play Store Download Button -->
+                    <a href="#" onclick="showDownloadNotice('Google Play')" class="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2.5 rounded-xl flex items-center gap-3 shadow-md transition transform active:scale-95">
+                        <i class="fa-brands fa-google-play text-xl text-emerald-400"></i>
+                        <div class="text-left">
+                            <div class="text-[9px] uppercase tracking-wider text-slate-400 font-medium">GET IT ON</div>
+                            <div class="text-xs font-bold leading-tight">Google Play</div>
+                        </div>
+                    </a>
+
+                    <!-- Mobile Contact Badges -->
+                    <a href="https://wa.me/6285606119969" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2.5 rounded-xl flex items-center gap-2 text-xs font-bold transition shadow-md">
+                        <i class="fa-brands fa-whatsapp text-base"></i>
+                        <span>WhatsApp Us</span>
+                    </a>
+                    
+                    <a href="mailto:ajiw6836@gmail.com" class="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-4 py-2.5 rounded-xl flex items-center gap-2 text-xs font-bold transition">
+                        <i class="fa-solid fa-envelope"></i>
+                        <span>Email Us</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls Section: Search & Category Filters -->
+        <section class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200/80 mb-8">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                
+                <!-- Category Filter Buttons -->
+                <div class="w-full md:w-auto overflow-x-auto hide-scrollbar pb-1 md:pb-0">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Category Filter:</label>
+                    <div id="category-buttons" class="flex flex-nowrap md:flex-wrap gap-2">
+                        <button onclick="filterCategory('All')" class="filter-btn active bg-emerald-600 text-white px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition shadow-sm whitespace-nowrap">
+                            All Products
+                        </button>
+                        <button onclick="filterCategory('Fruits & Veggies')" class="filter-btn bg-slate-100 hover:bg-emerald-50 text-slate-700 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition whitespace-nowrap">
+                            Fruits & Veggies
+                        </button>
+                        <button onclick="filterCategory('Dairy & Bakery')" class="filter-btn bg-slate-100 hover:bg-emerald-50 text-slate-700 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition whitespace-nowrap">
+                            Dairy & Bakery
+                        </button>
+                        <button onclick="filterCategory('Snacks & Drinks')" class="filter-btn bg-slate-100 hover:bg-emerald-50 text-slate-700 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition whitespace-nowrap">
+                            Snacks & Drinks
+                        </button>
+                        <button onclick="filterCategory('Meat & Seafood')" class="filter-btn bg-slate-100 hover:bg-emerald-50 text-slate-700 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition whitespace-nowrap">
+                            Meat & Seafood
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Search Input Bar -->
+                <div class="w-full md:w-72">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Search Catalog:</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                        <input type="text" id="search-input" onkeyup="searchProducts()" placeholder="Search groceries..." class="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white transition">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Grid Header -->
+        <section>
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-extrabold text-slate-800 flex items-center gap-2">
+                    <span>Product Catalog</span>
+                    <span id="active-category-badge" class="text-xs bg-emerald-100 text-emerald-800 px-2.5 py-0.5 rounded-full font-bold">All</span>
+                </h3>
+                <span id="product-count" class="text-xs sm:text-sm text-slate-500 font-medium">Showing 0 products</span>
+            </div>
+
+            <!-- Dynamic Product Grid -->
+            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Product card elements injected dynamically via JS -->
+            </div>
+
+            <!-- Empty Search / Filter State -->
+            <div id="empty-state" class="hidden text-center py-16 bg-white rounded-2xl border border-dashed border-slate-300">
+                <i class="fa-solid fa-basket-shopping text-5xl text-slate-300 mb-3"></i>
+                <h4 class="text-slate-700 font-bold text-lg">No Products Found</h4>
+                <p class="text-slate-400 text-sm mt-1 max-w-md mx-auto">Try searching for another keyword or select a different category filter above.</p>
+                <button onclick="resetFilters()" class="mt-4 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs px-4 py-2 rounded-xl transition">
+                    Reset All Filters
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Add Product Modal (Supports Image Upload) -->
+    <div id="add-product-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 transition-opacity duration-300 opacity-0 pointer-events-none">
+        <div class="bg-white rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl transform transition-all duration-300">
+            
+            <!-- Modal Header -->
+            <div class="bg-emerald-600 text-white p-5 flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-square-plus text-xl text-amber-300"></i>
+                    <h3 class="font-bold text-lg">Add New Grocery Item</h3>
+                </div>
+                <button onclick="toggleAddProductModal()" class="text-emerald-100 hover:text-white p-1 transition">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Product Form -->
+            <form id="add-product-form" onsubmit="handleAddNewProduct(event)" class="p-6 space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Product Name *</label>
+                    <input type="text" id="new-prod-name" required placeholder="e.g. Organic Gala Apples" class="w-full px-3.5 py-2 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Price ($ or IDR) *</label>
+                        <input type="number" id="new-prod-price" required step="0.01" min="0" placeholder="e.g. 4.99" class="w-full px-3.5 py-2 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Category *</label>
+                        <select id="new-prod-category" required class="w-full px-3.5 py-2 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white">
+                            <option value="Fruits & Veggies">Fruits & Veggies</option>
+                            <option value="Dairy & Bakery">Dairy & Bakery</option>
+                            <option value="Snacks & Drinks">Snacks & Drinks</option>
+                            <option value="Meat & Seafood">Meat & Seafood</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Product Description</label>
+                    <textarea id="new-prod-desc" rows="2" placeholder="Short description of fresh quality..." class="w-full px-3.5 py-2 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"></textarea>
+                </div>
+
+                <!-- Image Upload Section -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Upload Product Image *</label>
+                    <div class="border-2 border-dashed border-slate-300 rounded-2xl p-4 text-center hover:border-emerald-500 transition cursor-pointer bg-slate-50 relative" id="drop-zone">
+                        <input type="file" id="new-prod-image-file" accept="image/*" onchange="previewUploadedImage(event)" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full">
+                        <div id="image-upload-placeholder" class="space-y-1">
+                            <i class="fa-solid fa-cloud-arrow-up text-3xl text-emerald-600"></i>
+                            <p class="text-xs font-semibold text-slate-700">Click or drag image file here</p>
+                            <p class="text-[10px] text-slate-400">PNG, JPG, WEBP accepted</p>
+                        </div>
+                        <img id="image-upload-preview" src="#" alt="Preview" class="hidden max-h-36 mx-auto rounded-xl object-contain border border-slate-200 shadow-sm">
+                    </div>
+                </div>
+
+                <!-- OR Image URL Option -->
+                <div>
+                    <span class="block text-[11px] text-slate-400 font-semibold text-center uppercase my-1">- Or provide Image URL -</span>
+                    <input type="url" id="new-prod-image-url" placeholder="https://example.com/image.jpg" class="w-full px-3.5 py-2 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                </div>
+
+                <!-- Form Submit Buttons -->
+                <div class="flex gap-3 pt-2">
+                    <button type="button" onclick="toggleAddProductModal()" class="w-1/2 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl text-sm transition">
+                        Cancel
+                    </button>
+                    <button type="submit" class="w-1/2 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-sm shadow transition">
+                        Save Product
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Shopping Cart Modal -->
+    <div id="cart-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex justify-end transition-opacity duration-300 opacity-0 pointer-events-none">
+        <div class="bg-white w-full max-w-md h-full flex flex-col shadow-2xl transform transition-transform duration-300">
+            
+            <!-- Modal Header -->
+            <div class="p-4 bg-emerald-600 text-white flex justify-between items-center shadow">
+                <h3 class="font-bold text-lg flex items-center gap-2">
+                    <i class="fa-solid fa-cart-shopping text-amber-300"></i> Shopping Cart
+                </h3>
+                <button onclick="toggleCartModal()" class="text-emerald-100 hover:text-white p-1">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Cart Items List -->
+            <div id="cart-items" class="flex-grow overflow-y-auto p-4 space-y-3">
+                <p class="text-center text-slate-400 py-12">Your shopping cart is currently empty.</p>
+            </div>
+
+            <!-- Modal Footer / Checkout -->
+            <div class="p-5 border-t border-slate-200 bg-slate-50">
+                <div class="flex justify-between font-extrabold text-slate-800 text-lg mb-4">
+                    <span>Total Amount:</span>
+                    <span id="cart-total" class="text-emerald-600">$0.00</span>
+                </div>
+
+                <div class="space-y-2">
+                    <!-- Direct Order via WhatsApp -->
+                    <button onclick="checkoutWhatsApp()" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-bold shadow transition flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-xl"></i> Order via WhatsApp
+                    </button>
+
+                    <!-- Standard Web Checkout -->
+                    <button onclick="checkoutStandard()" class="w-full bg-slate-900 hover:bg-slate-800 text-white py-2.5 rounded-xl font-semibold text-sm transition">
+                        Quick Web Checkout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3 translate-y-20 opacity-0 transition-all duration-300 z-50 border border-slate-700">
+        <i id="toast-icon" class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+        <span id="toast-message" class="text-xs sm:text-sm font-semibold">Notification message</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 mt-16 py-10 text-slate-600 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                
+                <!-- Column 1: Store Bio -->
+                <div>
+                    <div class="flex items-center space-x-2 mb-3">
+                        <div class="bg-amber-400 p-2 rounded-xl text-slate-900 font-bold">
+                            <i class="fa-solid fa-basket-shopping"></i>
+                        </div>
+                        <h4 class="font-extrabold text-slate-900 text-lg">Ajovi_groceries</h4>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Your trusted neighborhood supermarket providing fresh vegetables, fruits, daily dairy, and quality groceries with fast home delivery.
+                    </p>
+                </div>
+
+                <!-- Column 2: Direct Contact Info -->
+                <div>
+                    <h5 class="font-bold text-slate-900 text-xs uppercase tracking-wider mb-3">Contact Support</h5>
+                    <ul class="space-y-2 text-xs">
+                        <li class="flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-green-600 text-base"></i>
+                            <a href="https://wa.me/6285606119969" target="_blank" class="hover:text-emerald-600 transition font-medium">WhatsApp: 085606119969</a>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-envelope text-amber-500 text-sm"></i>
+                            <a href="mailto:ajiw6836@gmail.com" class="hover:text-emerald-600 transition font-medium">Email: ajiw6836@gmail.com</a>
+                        </li>
+                        <li class="flex items-center gap-2 text-slate-500">
+                            <i class="fa-solid fa-clock text-slate-400"></i>
+                            <span>Open 7 Days a Week (07:00 AM - 10:00 PM)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Mobile Apps -->
+                <div>
+                    <h5 class="font-bold text-slate-900 text-xs uppercase tracking-wider mb-3">Download Mobile App</h5>
+                    <p class="text-xs text-slate-500 mb-3">Shop anywhere with the official Ajovi_groceries mobile app.</p>
+                    <div class="flex gap-2">
+                        <button onclick="showDownloadNotice('App Store')" class="bg-slate-900 text-white px-3 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 hover:bg-slate-800 transition">
+                            <i class="fa-brands fa-apple text-lg"></i> App Store
+                        </button>
+                        <button onclick="showDownloadNotice('Google Play')" class="bg-slate-900 text-white px-3 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 hover:bg-slate-800 transition">
+                            <i class="fa-brands fa-google-play text-emerald-400 text-base"></i> Google Play
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-100 pt-6 text-center text-xs text-slate-400">
+                <p>&copy; 2026 Ajovi_groceries. All rights reserved. Built for Web Development Assignment.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /* ==========================================================================
+           TASK 1a: Grocery Product Data Array (In English)
+           Contains: Name, Price, Description, Category, and Image URL.
+           ========================================================================== */
+        const dataProduk = [
+            {
+                id: 1,
+                nama: "Fresh Organic Bananas (Cluster)",
+                harga: 3.49,
+                deskripsi: "Sweet, naturally ripened organic yellow bananas packed with potassium.",
+                kategori: "Fruits & Veggies",
+                gambar: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=500&auto=format&fit=crop&q=80"
+            },
+            {
+                id: 2,
+                nama: "Crisp Red Gala Apples (1 kg)",
+                harga: 4.99,
+                deskripsi: "Juicy and crunchy hand-picked orchard fresh apples perfect for healthy snacks.",
+                kategori: "Fruits & Veggies",
+                gambar: "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=500&auto=format&fit=crop&q=80"
+            },
+            {
+                id: 3,
+                nama: "Whole Milk Pure Dairy (1 Liter)",
+                harga: 2.75,
+                deskripsi: "Pasteurized fresh farm whole milk rich in calcium and vitamin D.",
+                kategori: "Dairy & Bakery",
+                gambar: "https://images.unsplash.com/photo-1563636619-e9143da7973b?w=500&auto=format&fit=crop&q=80"
+            },
+            {
+                id: 4,
+                nama: "Artisanal Whole Wheat Bread",
+                harga: 3.20,
+                deskripsi: "Freshly baked whole grain loaf with high fiber and rich toasted flavor.",
+                kategori: "Dairy & Bakery",
+                gambar: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=500&auto=format&fit=crop&q=80"
+            },
+            {
+                id: 5,
+                nama: "Premium Roasted Salted Cashews",
+                harga: 6.50,
+                deskripsi: "Crispy oven-roasted cashew nuts with lightly sprinkled sea salt.",
+                kategori: "Snacks & Drinks",
+                gambar: "https://images.unsplash.com/photo-1509358217951-4ff270043167?w=500&auto=format&fit=crop&q=80"
+            },
+            {
+                id: 6,
+                nama: "Cold-Pressed Orange Juice (750ml)",
+                harga: 4.25,
+                deskripsi: "100% pure squeezed citrus juice with natural pulp and no added sugar.",
+                kategori: "Snacks & Drinks",
+                gambar: "https://images.unsplash.com/photo-1613478223719-2ab802602423?w=500&auto=format&fit=crop&q=80"
+            },
+            {
+                id: 7,
+                nama: "Fresh Salmon Fillet Skin-On",
+                harga: 12.99,
+                deskripsi: "Wild-caught Atlantic salmon rich in Omega-3 fatty acids, ready for grill.",
+                kategori: "Meat & Seafood",
+                gambar: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=500&auto=format&fit=crop&q=80"
+            },
+            {
+                id: 8,
+                nama: "Organic Chicken Breast Boneless",
+                harga: 8.45,
+                deskripsi: "Lean, tender farm-raised chicken breast without artificial preservatives.",
+                kategori: "Meat & Seafood",
+                gambar: "https://images.unsplash.com/photo-1604503468506-a8da13d82791?w=500&auto=format&fit=crop&q=80"
+            }
+        ];
+
+        // Global State
+        let currentCategory = 'All';
+        let cart = [];
+        let uploadedImageBase64 = '';
+
+        /* ==========================================================================
+           Helper: Currency Formatting
+           ========================================================================== */
+        function formatCurrency(amount) {
+            return '$' + parseFloat(amount).toFixed(2);
+        }
+
+        /* ==========================================================================
+           STREAMING_CHUNK:Implementing Task 1b - Dynamic product array looping...
+           TASK 1b: JavaScript code to display products in HTML using looping.
+           ========================================================================== */
+        function tampilkanProduk(daftar) {
+            const productGrid = document.getElementById('product-grid');
+            const emptyState = document.getElementById('empty-state');
+            const productCount = document.getElementById('product-count');
+
+            // Clear container before rendering
+            productGrid.innerHTML = '';
+
+            // Update item count indicator
+            productCount.textContent = `Showing ${daftar.length} products`;
+
+            // Display empty state if list is empty
+            if (daftar.length === 0) {
+                emptyState.classList.remove('hidden');
+                return;
+            } else {
+                emptyState.classList.add('hidden');
+            }
+
+            // Loop through data array using forEach
+            daftar.forEach(produk => {
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group";
+
+                card.innerHTML = `
+                    <div>
+                        <!-- Product Image -->
+                        <div class="relative overflow-hidden bg-slate-100 aspect-square">
+                            <img src="${produk.gambar}" 
+                                 alt="${produk.nama}" 
+                                 onerror="this.src='https://placehold.co/400x400/e2e8f0/475569?text=Grocery+Item'"
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-[11px] font-bold px-2.5 py-1 rounded-lg text-emerald-800 shadow-sm border border-emerald-100">
+                                ${produk.kategori}
+                            </span>
+                        </div>
+
+                        <!-- Product Information -->
+                        <div class="p-5">
+                            <h4 class="font-extrabold text-slate-800 text-base mb-1.5 line-clamp-1 group-hover:text-emerald-600 transition">
+                                ${produk.nama}
+                            </h4>
+                            <p class="text-xs text-slate-500 mb-4 line-clamp-2 leading-relaxed">
+                                ${produk.deskripsi}
+                            </p>
+                            <div class="text-emerald-600 font-black text-xl">
+                                ${formatCurrency(produk.harga)}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add to Cart Button -->
+                    <div class="p-5 pt-0">
+                        <button onclick="tambahKeKeranjang(${produk.id})" 
+                                class="w-full bg-slate-900 hover:bg-emerald-600 text-white text-xs font-bold py-3 rounded-2xl transition flex items-center justify-center gap-2 active:scale-95 shadow">
+                            <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                        </button>
+                    </div>
+                `;
+
+                productGrid.appendChild(card);
+            });
+        }
+
+        /* ==========================================================================
+           STREAMING_CHUNK:Implementing Task 2 - Category filter function...
+           TASK 2: Simple category filter functionality using JavaScript.
+           ========================================================================== */
+        function filterCategory(kategori) {
+            currentCategory = kategori;
+
+            // Update badge text
+            document.getElementById('active-category-badge').textContent = kategori;
+
+            // Toggle active styling on buttons
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => {
+                if (btn.textContent.trim().startsWith(kategori) || (kategori === 'All' && btn.textContent.trim() === 'All Products')) {
+                    btn.className = "filter-btn active bg-emerald-600 text-white px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition shadow-sm whitespace-nowrap";
+                } else {
+                    btn.className = "filter-btn bg-slate-100 hover:bg-emerald-50 text-slate-700 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition whitespace-nowrap";
+                }
+            });
+
+            // Reset search input on category change
+            document.getElementById('search-input').value = '';
+
+            // Filter array
+            if (kategori === 'All') {
+                tampilkanProduk(dataProduk);
+            } else {
+                const hasilFilter = dataProduk.filter(p => p.kategori === kategori);
+                tampilkanProduk(hasilFilter);
+            }
+        }
+
+        /* ==========================================================================
+           STREAMING_CHUNK:Implementing search, image upload preview, and modals...
+           Search & Filter Helpers
+           ========================================================================== */
+        function searchProducts() {
+            const keyword = document.getElementById('search-input').value.toLowerCase().trim();
+
+            const hasilCari = dataProduk.filter(produk => {
+                const matchesCategory = (currentCategory === 'All' || produk.kategori === currentCategory);
+                const matchesName = produk.nama.toLowerCase().includes(keyword);
+                const matchesDesc = produk.deskripsi.toLowerCase().includes(keyword);
+                return matchesCategory && (matchesName || matchesDesc);
+            });
+
+            tampilkanProduk(hasilCari);
+        }
+
+        function resetFilters() {
+            document.getElementById('search-input').value = '';
+            filterCategory('All');
+        }
+
+        /* ==========================================================================
+           Image Upload & New Product Handling
+           ========================================================================== */
+        function toggleAddProductModal() {
+            const modal = document.getElementById('add-product-modal');
+            modal.classList.toggle('opacity-0');
+            modal.classList.toggle('pointer-events-none');
+        }
+
+        function previewUploadedImage(event) {
+            const file = event.target.files[0];
+            const preview = document.getElementById('image-upload-preview');
+            const placeholder = document.getElementById('image-upload-placeholder');
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    uploadedImageBase64 = e.target.result;
+                    preview.src = uploadedImageBase64;
+                    preview.classList.remove('hidden');
+                    placeholder.classList.add('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function handleAddNewProduct(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('new-prod-name').value.trim();
+            const price = parseFloat(document.getElementById('new-prod-price').value);
+            const category = document.getElementById('new-prod-category').value;
+            const desc = document.getElementById('new-prod-desc').value.trim() || 'Fresh high-quality grocery product.';
+            const urlInput = document.getElementById('new-prod-image-url').value.trim();
+
+            let finalImage = 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=500&auto=format&fit=crop&q=80';
+
+            if (uploadedImageBase64) {
+                finalImage = uploadedImageBase64;
+            } else if (urlInput) {
+                finalImage = urlInput;
+            }
+
+            const newProduct = {
+                id: Date.now(),
+                nama: name,
+                harga: price,
+                deskripsi: desc,
+                kategori: category,
+                gambar: finalImage
+            };
+
+            // Add to array at the beginning
+            dataProduk.unshift(newProduct);
+
+            // Refresh UI
+            filterCategory('All');
+            
+            // Reset form
+            document.getElementById('add-product-form').reset();
+            document.getElementById('image-upload-preview').classList.add('hidden');
+            document.getElementById('image-upload-placeholder').classList.remove('hidden');
+            uploadedImageBase64 = '';
+
+            toggleAddProductModal();
+            tampilkanToast(`"${name}" was successfully added to catalog!`);
+        }
+
+        /* ==========================================================================
+           STREAMING_CHUNK:Implementing shopping cart & WhatsApp integration...
+           Shopping Cart Functions
+           ========================================================================== */
+        function tambahKeKeranjang(idProduk) {
+            const produk = dataProduk.find(p => p.id === idProduk);
+            if (!produk) return;
+
+            const existingItem = cart.find(item => item.id === idProduk);
+            if (existingItem) {
+                existingItem.jumlah += 1;
+            } else {
+                cart.push({ ...produk, jumlah: 1 });
+            }
+
+            updateKeranjangUI();
+            tampilkanToast(`Added "${produk.nama}" to cart!`);
+        }
+
+        function updateKeranjangUI() {
+            const cartCount = document.getElementById('cart-count');
+            const cartItems = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+
+            const totalItem = cart.reduce((total, item) => total + item.jumlah, 0);
+            cartCount.textContent = totalItem;
+
+            const totalHarga = cart.reduce((total, item) => total + (item.harga * item.jumlah), 0);
+            cartTotal.textContent = formatCurrency(totalHarga);
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = `<p class="text-center text-slate-400 py-12 text-sm">Your shopping cart is currently empty.</p>`;
+                return;
+            }
+
+            cartItems.innerHTML = cart.map(item => `
+                <div class="flex items-center gap-3 bg-slate-50 p-3 rounded-2xl border border-slate-200">
+                    <img src="${item.gambar}" alt="${item.nama}" class="w-14 h-14 object-cover rounded-xl bg-slate-200">
+                    <div class="flex-grow">
+                        <h5 class="text-xs font-bold text-slate-800 line-clamp-1">${item.nama}</h5>
+                        <p class="text-xs text-emerald-600 font-extrabold mt-0.5">${formatCurrency(item.harga)}</p>
+                        <div class="flex items-center gap-2 mt-2">
+                            <button onclick="ubahJumlahCart(${item.id}, -1)" class="w-6 h-6 rounded-lg bg-slate-200 text-slate-700 text-xs font-bold hover:bg-slate-300">-</button>
+                            <span class="text-xs font-bold">${item.jumlah}</span>
+                            <button onclick="ubahJumlahCart(${item.id}, 1)" class="w-6 h-6 rounded-lg bg-slate-200 text-slate-700 text-xs font-bold hover:bg-slate-300">+</button>
+                        </div>
+                    </div>
+                    <button onclick="hapusDariCart(${item.id})" class="text-rose-500 hover:text-rose-700 p-2">
+                        <i class="fa-solid fa-trash-can text-sm"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function ubahJumlahCart(idProduk, delta) {
+            const item = cart.find(i => i.id === idProduk);
+            if (!item) return;
+
+            item.jumlah += delta;
+            if (item.jumlah <= 0) {
+                hapusDariCart(idProduk);
+            } else {
+                updateKeranjangUI();
+            }
+        }
+
+        function hapusDariCart(idProduk) {
+            cart = cart.filter(item => item.id !== idProduk);
+            updateKeranjangUI();
+            tampilkanToast("Item removed from cart.");
+        }
+
+        function toggleCartModal() {
+            const modal = document.getElementById('cart-modal');
+            modal.classList.toggle('opacity-0');
+            modal.classList.toggle('pointer-events-none');
+        }
+
+        function checkoutWhatsApp() {
+            if (cart.length === 0) {
+                tampilkanToast("Your cart is empty!");
+                return;
+            }
+
+            let message = "Hello Ajovi_groceries! I would like to place an order:\n\n";
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                const itemTotal = item.harga * item.jumlah;
+                total += itemTotal;
+                message += `${index + 1}. ${item.nama} x${item.jumlah} - $${itemTotal.toFixed(2)}\n`;
+            });
+
+            message += `\n*Total Order Amount: $${total.toFixed(2)}*\n\nPlease confirm availability and payment details. Thank you!`;
+
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/6285606119969?text=${encodedMessage}`, '_blank');
+        }
+
+        function checkoutStandard() {
+            if (cart.length === 0) {
+                tampilkanToast("Your cart is empty!");
+                return;
+            }
+            cart = [];
+            updateKeranjangUI();
+            toggleCartModal();
+            tampilkanToast("Order placed successfully! We will process your groceries soon.");
+        }
+
+        function showDownloadNotice(storeName) {
+            tampilkanToast(`Ajovi_groceries app for ${storeName} will be available soon!`);
+        }
+
+        function tampilkanToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+
+            toastMessage.textContent = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        /* Initial load */
+        window.addEventListener('DOMContentLoaded', () => {
+            tampilkanProduk(dataProduk);
+        });
+    </script>
+</body>
+</html>
